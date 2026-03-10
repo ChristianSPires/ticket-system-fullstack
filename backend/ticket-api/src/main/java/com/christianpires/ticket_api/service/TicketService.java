@@ -6,6 +6,7 @@ import com.christianpires.ticket_api.dto.UpdateTicketStatusRequest;
 import com.christianpires.ticket_api.entity.Ticket;
 import com.christianpires.ticket_api.enums.TicketStatus;
 import com.christianpires.ticket_api.exception.TicketNotFoundException;
+import com.christianpires.ticket_api.mapper.TicketMapper;
 import com.christianpires.ticket_api.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,11 @@ import java.util.List;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
+    private final TicketMapper ticketMapper;
 
-    public TicketService(TicketRepository ticketRepository) {
+    public TicketService(TicketRepository ticketRepository, TicketMapper ticketMapper) {
         this.ticketRepository = ticketRepository;
+        this.ticketMapper = ticketMapper;
     }
 
     public TicketResponse createTicket(CreateTicketRequest request) {
@@ -30,13 +33,13 @@ public class TicketService {
                 .build();
 
         Ticket savedTicket = ticketRepository.save(ticket);
-        return toResponse(savedTicket);
+        return ticketMapper.toResponse(savedTicket);
     }
 
     public List<TicketResponse> getAllTickets() {
         return ticketRepository.findAll()
                 .stream()
-                .map(this::toResponse)
+                .map(ticketMapper::toResponse)
                 .toList();
     }
 
@@ -44,7 +47,7 @@ public class TicketService {
         Ticket ticket = ticketRepository.findById(id)
                 .orElseThrow(() -> new TicketNotFoundException(id));
 
-        return toResponse(ticket);
+        return ticketMapper.toResponse(ticket);
     }
 
     public TicketResponse updateTicketStatus(Long id, UpdateTicketStatusRequest request) {
@@ -54,7 +57,7 @@ public class TicketService {
         ticket.setStatus(request.getStatus());
         Ticket updatedTicket = ticketRepository.save(ticket);
 
-        return toResponse(updatedTicket);
+        return ticketMapper.toResponse(updatedTicket);
     }
 
     public void deleteTicket(Long id) {
@@ -62,15 +65,5 @@ public class TicketService {
                 .orElseThrow(() -> new TicketNotFoundException(id));
 
         ticketRepository.delete(ticket);
-    }
-
-    private TicketResponse toResponse(Ticket ticket) {
-        return TicketResponse.builder()
-                .id(ticket.getId())
-                .title(ticket.getTitle())
-                .description(ticket.getDescription())
-                .status(ticket.getStatus())
-                .createdAt(ticket.getCreatedAt())
-                .build();
     }
 }
