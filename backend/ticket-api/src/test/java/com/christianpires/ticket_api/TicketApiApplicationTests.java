@@ -9,5 +9,4 @@ class TicketApiApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
