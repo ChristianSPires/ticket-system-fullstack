@@ -102,7 +102,7 @@ src/test/java/com/christianpires/ticket_api
 
 ---
 
-## Frontend Structure
+# Frontend Structure
 
 ```text
 frontend
