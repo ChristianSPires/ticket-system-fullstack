@@ -1,6 +1,6 @@
 # Ticket System API
 
-REST API developed as part of a Full Stack Developer technical challenge.
+Full Stack application developed as part of a Full Stack Developer technical challenge.
 
 The system allows managing technical support tickets.
 
@@ -15,6 +15,13 @@ The system allows managing technical support tickets.
 - Spring Data JPA
 - H2 Database
 - Maven
+
+## Frontend
+
+- HTML
+- CSS
+- JavaScript (Vanilla)
+- Fetch API
 
 ## Testing
 
@@ -41,74 +48,75 @@ The instructions below assume a Windows shell; use the equivalent commands on ma
 
 ---
 
----
+# Backend Structure
 
-# Project Structure
+## Project Structure
 
+```text
 backend/ticket-api
-│
-├── src/main/java/com/christianpires/ticket_api
-│
-├── controller
-│   └── TicketController
-│
-├── service
-│   └── TicketService
-│
-├── repository
-│   └── TicketRepository
-│
-├── entity
-│   └── Ticket
-│
-├── dto
-│   ├── CreateTicketRequest
-│   ├── UpdateTicketStatusRequest
-│   └── TicketResponse
-│
-├── enums
-│   └── TicketStatus
-│
-├── mapper
-│   └── TicketMapper
-│
-├── exception
-│   ├── ApiErrorResponse
-│   ├── TicketNotFoundException
-│   └── GlobalExceptionHandler
-│
-├── config
-│   └── OpenApiConfig
-│
-└── TicketApiApplication
+└── src/main/java/com/christianpires/ticket_api
+    ├── controller
+    │   └── TicketController
+    ├── service
+    │   └── TicketService
+    ├── repository
+    │   └── TicketRepository
+    ├── entity
+    │   └── Ticket
+    ├── dto
+    │   ├── CreateTicketRequest
+    │   ├── UpdateTicketStatusRequest
+    │   └── TicketResponse
+    ├── enums
+    │   └── TicketStatus
+    ├── mapper
+    │   └── TicketMapper
+    ├── exception
+    │   ├── ApiErrorResponse
+    │   ├── TicketNotFoundException
+    │   └── GlobalExceptionHandler
+    ├── config
+    │   └── OpenApiConfig
+    └── TicketApiApplication
+```
 
 ---
 
-# Test Structure
+## Test Structure
 
+```text
 src/test/java/com/christianpires/ticket_api
-│
 ├── controller
 │   └── TicketControllerTest
-│
 ├── service
 │   └── TicketServiceTest
-│
 ├── mapper
 │   └── TicketMapperTest
-│
 ├── exception
 │   ├── GlobalExceptionHandlerTest
 │   └── TicketNotFoundExceptionTest
-│
 ├── config
 │   └── OpenApiConfigTest
-│
 └── TicketApiApplicationTests
+```
 
 ---
 
-# Running the Application
+## Frontend Structure
+
+```text
+frontend
+├── index.html
+├── css
+│   └── styles.css
+└── js
+    ├── api.js
+    └── app.js
+```
+
+---
+
+# Running the Backend
 
 Navigate to:
 
@@ -123,6 +131,36 @@ mvnw.cmd spring-boot:run
 ```
 
 The API will start at:
+
+```bash
+http://localhost:8080
+```
+
+---
+
+# Running the Frontend
+
+After starting the backend API, open the frontend.
+
+Navigate to:
+
+```bash
+cd frontend
+```
+
+Open the file:
+
+```bash
+index.html
+```
+
+You can open it directly in the browser or use a local server (recommended).
+
+If using VS Code, install the `Live Server` extension and run:
+
+Right click → `Open with Live Server`
+
+The frontend will consume the API at:
 
 ```bash
 http://localhost:8080
